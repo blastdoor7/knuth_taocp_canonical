@@ -12,10 +12,10 @@ Faithful transcription of Knuth’s algorithms
 Canonical reference implementations for research, teaching, or experimentation
 Edition-specific filenames 
 Repository Layout
-vol1_1ed/     # Volume 1, First Edition
-vol1_2ed/     # Volume 1, Second Edition
-vol2_1ed/     # Volume 2, First Edition
-vol3_2ed/     # Volume 3, Second Edition
+vol1/1ed/     # Volume 1, First Edition
+vol1/2ed/     # Volume 1, Second Edition
+vol2/1ed/     # Volume 2, First Edition
+vol3/2ed/     # Volume 3, Second Edition
 ...
 Files follow the naming convention:
 `knuth_taocp_v<volume>_<edition>_p<page>_<algorithm>.mixal`
