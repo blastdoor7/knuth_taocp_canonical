@@ -1,0 +1,161 @@
+* ============================================================
+*  File: knuth_taocp_v3_2ed_p117_algorithm_q_quicksort.mixal
+*  Title: Algorithm Q — Quicksort (Knuth, TAOCP Vol. III, 2ed, §5.2.2)
+*
+*  Source:
+*    Donald E. Knuth,
+*    The Art of Computer Programming,
+*    Volume 3: Sorting and Searching,
+*    Second Edition, Addison-Wesley.
+*    Algorithm Q, §5.2.2, p.117
+*
+*  Base Text:
+*    TAOCP Vol. 3, Second Edition
+*
+*  Description:
+*    Faithful MIXAL transcription of Algorithm Q.
+*    Sorting is done in place on the array beginning at address 100.
+*
+*  Fidelity:
+*    Original instruction sequence and label structure preserved.
+*
+*  Editorial Adaptations:
+*    Stack and input initialized explicitly for test run.
+*    Halt point added after completion.
+*
+*  Verification:
+*    Execution verified under GNU mdk.
+*
+*  Status:
+*    Canonical reference implementation
+*
+*  Date: 2026-03-29
+* ============================================================
+
+* -----------------------------
+* Constants / memory
+* -----------------------------
+N       EQU 20
+M       EQU 10
+STACK   EQU 1000
+
+* Sample input array at address 100
+        ORIG 100
+INPUT   CON 0
+        CON 6
+        CON 1
+        CON 5
+        CON 3
+        CON 8
+        CON 2
+        CON 7
+        CON 4
+        CON 9
+        CON 20
+        CON 19
+        CON 18
+        CON 17
+        CON 16
+        CON 15
+        CON 14
+        CON 13
+        CON 12
+        CON 11
+        CON 10
+
+* Allocate stack space (no label!)
+        ORIG STACK
+        CON 0
+        CON 0
+        CON 0
+        CON 0
+        CON 0
+        CON 0
+        CON 0
+        CON 0
+        CON 0
+        CON 0
+
+* -----------------------------
+* Program start
+* -----------------------------
+        ORIG 3000
+START	JMP QSSUB     * call quicksort
+HALTPT  HLT           * stop after sorting
+
+* -----------------------------
+* QuickSort subroutine
+* -----------------------------
+A       EQU 2:3
+B       EQU 4:5
+QSSUB	ENT6 0  * L 01
+	ENT2 1  * L 02
+	ENT3 N   * L 03
+2H	ENT5 1,3  * L 04
+	LDA INPUT,2  * L 05
+	ENT4 1,2 * L 06
+	JMP 0F  * L 07
+6H 	LDX INPUT,4 * L 08
+	ENT1 INPUT,4  * L 09
+	MOVE INPUT,5 * L 10 
+	STX INPUT,5 * L 11 
+3H 	INC4 1  * L 12
+0H 	CMPA INPUT,4 * L 13
+	JG 3B  * L 14
+4H 	DEC5 1  * L 15
+	CMPA INPUT,5 * L 16
+	JL 4B  * L 17
+5H 	ENTX 0,5  * L 18
+	DECX 0,4 * L 19
+	JXP 6B  * L 20
+	LDX INPUT,5 * L 21
+	STX INPUT,2 * L 22
+	STA INPUT,5 * L 23
+7H 	ENT4 0,3  * L 24
+	DEC4 M,5 * L 25
+	ENT1 0,5 * L 26
+	DEC1 M,2 * L 27
+	ENTA 0,4  * L 28
+	DECA 0,1  * L 29
+	JANN 1F  * L 30
+	J1NP 8F * L 31
+	J4NP 3F * L 32
+	INC6 1 * L 33
+	ST2 STACK,6(A)  * L 34
+	ENTA -1,5  * L 35
+	STA STACK,6(B) * L 36
+4H 	ENT2 1,5  * L 37
+	JMP 2B  * L 38
+1H 	J4NP 8F  * L 39
+	J1NP 4B  * L 40
+	INC6 1 * L 41
+	ST3 STACK,6(B)  * L 42
+	ENTA 1,5  * L 43
+	STA STACK,6(A)  * L 44
+3H 	ENT3 -1,5  * L 45
+	JMP 2B  * L 46
+8H 	LD2 STACK,6(A)  * L 47
+	LD3 STACK,6(B)  * L 48
+	DEC6 1 * L 49
+	J6NN 2B * L 50
+9H 	ENT5 2-N  * L 51
+2H 	LDA INPUT+N,5 * L 52
+	CMPA INPUT+N-1,5 * L 53
+	JGE 6F * L 54
+3H 	ENT4 N-1,5  * L 55
+4H 	LDX INPUT,4 * L 56
+	STX INPUT+1,4 * L 57
+	DEC4 1  * L 58
+        CMPA INPUT,4 * L 59
+	JL 4B  * L 60
+5H 	STA INPUT+1,4 * L 61
+6H 	INC5 1  * L 62
+	J5NP 2B  * L 63
+
+        JMP HALTPT
+
+* -----------------------------
+* End of program
+* -----------------------------
+        END START
+
