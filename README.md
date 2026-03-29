@@ -18,7 +18,7 @@ vol2_1ed/     # Volume 2, First Edition
 vol3_2ed/     # Volume 3, Second Edition
 ...
 Files follow the naming convention:
-knuth_taocp_v\<volume>_\<edition>_p\<page>_\<algorithm>.mixal
+`knuth_taocp_v<volume>_<edition>_p<page>_<algorithm>.mixal`
 
 Example:
 
