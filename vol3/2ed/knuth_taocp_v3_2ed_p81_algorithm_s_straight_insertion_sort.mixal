@@ -1,0 +1,88 @@
+* ============================================================
+*  File: knuth_taocp_v3_2ed_p81_algorithm_s_straight_insertion_sort.mixal
+*  Title: Algorithm S — Straight insertion (Knuth, TAOCP Vol. III, 2ed, §5.2.1)
+*
+*  Source:
+*    Donald E. Knuth,
+*    The Art of Computer Programming,
+*    Volume 3: Sorting and Searching,
+*    Second Edition, Addison-Wesley.
+*    Algorithm S, §5.2.1, p.81
+*
+*  Base Text:
+*    TAOCP Vol. 3, Second Edition
+*
+*  Description:
+*    Faithful MIXAL transcription of Algorithm S.
+*    Sorting is done in place on the array beginning at address 100.
+*
+*  Fidelity:
+*    Original instruction sequence and label structure preserved.
+*
+*  Editorial Adaptations:
+*    Stack and input initialized explicitly for test run.
+*    Halt point added after completion.
+*
+*  Verification:
+*    Execution verified under GNU mdk.
+*
+*  Status:
+*    Canonical reference implementation
+*
+*  Date: 2026-03-30
+* ============================================================
+
+* -----------------------------
+* Constants / memory
+* -----------------------------
+N       EQU 16
+
+* Sample input array at address 100
+        ORIG 100
+INPUT	CON  -1 * K0
+	CON 503
+        CON  87
+        CON 512
+        CON  61
+        CON 908
+        CON 170
+        CON 897
+        CON 275
+        CON 653
+        CON 426
+        CON 154
+        CON 509
+        CON 612
+        CON 677
+        CON 765
+        CON 703
+
+* -----------------------------
+* Program start
+* -----------------------------
+        ORIG 3000
+START	JMP SISUB     * call straight insertion
+HALTPT  HLT           * stop after sorting
+
+* -----------------------------
+* Straight insertion subroutine
+* -----------------------------
+SISUB	ENT1 2-N	* 01
+2H	LDA INPUT+N,1	* 02
+	ENT2 N-1,1	* 03
+3H	CMPA INPUT,2	* 04
+	JGE 5F		* 05
+4H	LDX INPUT,2	* 06
+	STX INPUT+1,2	* 07
+	DEC2 1		* 08
+	J2P 3B		* 09
+5H	STA INPUT+1,2	* 10
+	INC1 1		* 11
+	J1NP 2B		* 12
+
+        JMP HALTPT
+
+* -----------------------------
+* End of program
+* -----------------------------
+        END START
